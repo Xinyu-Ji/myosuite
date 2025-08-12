@@ -212,8 +212,8 @@ class WalkEnvV0(BaseV0):
         self.init_qvel[:] = 0.0
 
         # move heightfield down if not used
-        self.sim.model.geom_rgba[self.sim.model.geom_name2id('terrain')][-1] = 0.0
-        self.sim.model.geom_pos[self.sim.model.geom_name2id('terrain')] = np.array([0, 0, -10])
+        # self.sim.model.geom_rgba[self.sim.model.geom_name2id('terrain')][-1] = 0.0
+        # self.sim.model.geom_pos[self.sim.model.geom_name2id('terrain')] = np.array([0, 0, -10])
 
     def get_obs_dict(self, sim):
         obs_dict = {}

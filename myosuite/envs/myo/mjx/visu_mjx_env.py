@@ -7,7 +7,7 @@ from myosuite.envs.myo.mjx import make
 
 
 def main():
-    env = make("MjxElbowPoseFixed-v0")
+    env = make("MjxWalkFixed-v0")
 
     # We could get the model from the env, but we want to make some edits for convenience
     spec = mujoco.MjSpec.from_file(env.xml_path)
@@ -35,7 +35,7 @@ def main():
 
             # We'll use the sensordata array to visualize key values as real-time bar-graphs (use F4 in viewer)
             d.sensordata[0] = state.reward
-            d.sensordata[1:] = state.info['target_angles']
+            # d.sensordata[1:] = state.info['target_angles']
 
             # Pick up changes to the physics state, apply perturbations, update options from GUI.
             viewer.sync()
