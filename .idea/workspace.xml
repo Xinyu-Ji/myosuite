@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8624193d-e420-406c-930f-bd3720ac7e62" name="Changes" comment="作为mjx的测试版本">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myosuite/envs/myo/mjx/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/envs/myo/mjx/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myosuite/envs/myo/mjx/playground_walk_v0.py" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/envs/myo/mjx/playground_walk_v0.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myosuite/envs/myo/mjx/visu_mjx_env.py" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/envs/myo/mjx/visu_mjx_env.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myosuite/envs/myo/myobase/walk_v0.py" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/envs/myo/myobase/walk_v0.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myosuite/simhive/myo_sim" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/simhive/myo_sim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myosuite/simhive/myo_sim/leg/myolegs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/simhive/myo_sim/leg/myolegs.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +64,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "mjx__test",
-    "last_opened_file_path": "/home/max_lab/RL_Limx/pointfoot_project/pointfoot_legged_gym",
+    "last_opened_file_path": "/home/max_lab/Opensim_Exp_RL/myosuite/myosuite/envs/myo/mjx",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -126,7 +125,8 @@
       <option name="presentableId" value="Default" />
       <updated>1754537204211</updated>
       <workItem from="1754537205258" duration="1336000" />
-      <workItem from="1754973029568" duration="9814000" />
+      <workItem from="1754973029568" duration="10079000" />
+      <workItem from="1755053009005" duration="5166000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <option name="closed" value="true" />
@@ -152,7 +152,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754980745199</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="作为mjx的测试版本">
+      <option name="closed" value="true" />
+      <created>1754988203353</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1754988203353</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

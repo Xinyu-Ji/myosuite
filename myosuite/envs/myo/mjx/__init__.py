@@ -39,26 +39,6 @@ reach_env_config = config_dict.create(
         model_path=epath.Path('/tmp/dummy.xml')
     )
 
-# 新增Walk环境配置
-walk_env_config = config_dict.create(
-        ctrl_dt=0.02,  # not used
-        sim_dt=0.002,  # not used
-        reward_weights=config_dict.create(
-            vel_reward=5.0,
-            cyclic_hip=-10.0,
-            ref_rot=10.0,
-            joint_angle_rew=5.0
-        ),
-        min_height=0.8,
-        max_rot=0.8,
-        hip_period=100,
-        reset_type='init',
-        target_x_vel=0.0,
-        target_y_vel=1.2,
-        target_rot=None,
-        model_path=epath.Path('/tmp/dummy.xml')
-    )
-
 ppo_config = config_dict.create(
         num_timesteps=40_000_000,
         num_evals=16,
@@ -104,11 +84,6 @@ model_path='envs/myo/assets/hand/'
 model_filename='myohand_pose.xml'
 hand_reach_env_config['model_path'] = epath.Path(epath.resource_path('myosuite')) / model_path / model_filename
 
-# Walk tips reaching ==============================
-walk_env_config = copy.deepcopy(walk_env_config)
-model_path='simhive/myo_sim/leg/'
-model_filename='myolegs.xml'
-walk_env_config['model_path'] = epath.Path(epath.resource_path('myosuite')) / model_path / model_filename
 
 def config_callable(env_config) -> Callable[[], config_dict.ConfigDict]:
     fn = lambda : env_config
@@ -187,27 +162,11 @@ def make(env_name: str) -> mjx_env.MjxEnv:
         env = registry.load(env_name)
 
         return env
-    # 新增Walk环境注册
-    if "MjxWalk" in env_name:
-        if env_name == "MjxWalkFixed-v0":
-            walk_env_config['target_y_vel'] = 1.2
-            walk_env_config['target_x_vel'] = 0.0
-            walk_env_config['reset_type'] = 'init'
-        elif env_name == "MjxWalkRandom-v0":
-            walk_env_config['target_y_vel'] = jp.array((0.8, 1.5))
-            walk_env_config['target_x_vel'] = jp.array((-0.2, 0.2))
-            walk_env_config['reset_type'] = 'random'
-        registry.register_environment(env_name,
-                                    MjxWalkEnvV0,
-                                    config_callable(walk_env_config))
-        env = registry.load(env_name)
-        return env
+
 
 env_names = ["MjxElbowPoseFixed-v0",
              "MjxElbowPoseRandom-v0",
              "MjxFingerPoseFixed-v0",
              "MjxFingerPoseRandom-v0",
              "MjxHandReachRandom-v0",
-             "MjxHandReachFixed-v0",
-             "MjxWalkFixed-v0",      # 新增Walk环境
-             "MjxWalkRandom-v0"]
+             "MjxHandReachFixed-v0"]
