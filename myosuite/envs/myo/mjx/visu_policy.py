@@ -9,7 +9,7 @@ from brax.training.agents.ppo import networks as ppo_networks
 from brax.io import model
 from functools import partial
 
-model_path = '/params/playground_params.pickle'
+model_path = 'playground_params.pickle'
 xml = '../assets/elbow/myoelbow_1dof6muscles_mjx_eval.xml'
 
 ppo_network = ppo_networks.make_ppo_networks(

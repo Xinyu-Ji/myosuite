@@ -58,7 +58,7 @@ class MjxReachEnvV0(mjx_env.MjxEnv):
     def reset(self, rng: jp.ndarray) -> State:
         """Resets the environment to an initial state."""
         rng, rng1, rng2 = jax.random.split(rng, 3)
-
+        #位置
         qpos = jax.random.uniform(
             rng1, (self.mjx_model.nq,),
             minval=self.mjx_model.jnt_range[:,0],

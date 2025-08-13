@@ -5,11 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8624193d-e420-406c-930f-bd3720ac7e62" name="Changes" comment="作为mjx的测试版本">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/myosuite.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/myosuite.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myosuite/envs/myo/mjx/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/envs/myo/mjx/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myosuite/envs/myo/mjx/playground_reach_v0.py" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/envs/myo/mjx/playground_reach_v0.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myosuite/envs/myo/mjx/playground_walk_v0.py" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/envs/myo/mjx/playground_walk_v0.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myosuite/envs/myo/mjx/train_jax_ppo.py" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/envs/myo/mjx/train_jax_ppo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myosuite/envs/myo/mjx/visu_mjx_env.py" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/envs/myo/mjx/visu_mjx_env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myosuite/envs/myo/mjx/visu_policy.py" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/envs/myo/mjx/visu_policy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myosuite/simhive/MPL_sim" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/simhive/MPL_sim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myosuite/simhive/YCB_sim" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/simhive/YCB_sim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myosuite/simhive/furniture_sim" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/simhive/furniture_sim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myosuite/simhive/myo_sim" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/simhive/myo_sim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myosuite/simhive/myo_sim/leg/myolegs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/simhive/myo_sim/leg/myolegs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myosuite/simhive/object_sim" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/simhive/object_sim" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +69,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.smooth.executor": "Run",
+    "Python.train_jax_ppo.executor": "Run",
     "Python.visu_mjx_env.executor": "Run",
+    "Python.visu_policy.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -79,7 +92,51 @@
       <recent name="$PROJECT_DIR$/myosuite/envs/myo/mjx" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.visu_mjx_env">
+    <configuration name="smooth" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="myosuite" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/anaconda3/envs/myosuite/lib/python3.10/site-packages/mujoco/mjx/_src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/anaconda3/envs/myosuite/lib/python3.10/site-packages/mujoco/mjx/_src/smooth.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train_jax_ppo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="myosuite" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/myosuite/envs/myo/mjx" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/myosuite/envs/myo/mjx/train_jax_ppo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="visu_mjx_env" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="myosuite" />
       <option name="ENV_FILES" value="" />
@@ -103,16 +160,40 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="visu_policy" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="myosuite" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/myosuite/envs/myo/mjx" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/myosuite/envs/myo/mjx/visu_policy.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.visu_mjx_env" />
+        <item itemvalue="Python.smooth" />
+        <item itemvalue="Python.train_jax_ppo" />
+        <item itemvalue="Python.visu_policy" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-PY-251.26094.141" />
         <option value="bundled-python-sdk-9f8e2b94138c-36ea0e71a18c-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.26094.141" />
       </set>
     </attachedChunks>

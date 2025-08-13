@@ -7,7 +7,7 @@ from myosuite.envs.myo.mjx import make
 
 
 def main():
-    env = make("MjxWalkFixed-v0")
+    env = make("MjxMyoLegWalkFixed-v0")
 
     # We could get the model from the env, but we want to make some edits for convenience
     spec = mujoco.MjSpec.from_file(env.xml_path)

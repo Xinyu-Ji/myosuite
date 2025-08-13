@@ -32,12 +32,33 @@ reach_env_config = config_dict.create(
         reward_weights=config_dict.create(
             reach=1.,
             bonus=4.,
-            penalty=50.,
+            penalty=5.,
         ),
         target_reach_range=config_dict.ConfigDict(),
         far_th=0.35,
         model_path=epath.Path('/tmp/dummy.xml')
     )
+
+# Walk环境配置 ==============================
+walk_env_config = config_dict.create(
+    ctrl_dt=0.02,  # not used
+    sim_dt=0.002,  # not used
+    reward_config=config_dict.create(
+        vel_reward_weight=5.0,
+        cyclic_hip_weight=-10.0,
+        ref_rot_weight=10.0,
+        joint_angle_rew_weight=5.0
+    ),
+    min_height=0.8,
+    max_rot=0.8,
+    hip_period=100,
+    target_x_vel=0.0,
+    target_y_vel=1.2,
+    target_rot=None,
+    model_path=epath.Path('/tmp/dummy.xml')
+)
+
+
 
 ppo_config = config_dict.create(
         num_timesteps=40_000_000,
@@ -55,7 +76,7 @@ ppo_config = config_dict.create(
         discounting=0.97,
         learning_rate=3e-4,
         entropy_cost=0.001,
-        num_envs=8192,
+        num_envs=2048,
         batch_size=512,
         max_grad_norm=1.0,
         network_factory=config_dict.create(
@@ -83,6 +104,12 @@ hand_reach_env_config = copy.deepcopy(reach_env_config)
 model_path='envs/myo/assets/hand/'
 model_filename='myohand_pose.xml'
 hand_reach_env_config['model_path'] = epath.Path(epath.resource_path('myosuite')) / model_path / model_filename
+
+# MyoLeg Walk配置 ==============================
+myoleg_walk_env_config = copy.deepcopy(walk_env_config)
+model_path='simhive/myo_sim/leg/'
+model_filename='myolegs.xml'
+myoleg_walk_env_config['model_path'] = epath.Path(epath.resource_path('myosuite')) / model_path / model_filename
 
 
 def config_callable(env_config) -> Callable[[], config_dict.ConfigDict]:
@@ -163,10 +190,27 @@ def make(env_name: str) -> mjx_env.MjxEnv:
 
         return env
 
+    if "MjxMyoLegWalk" in env_name:
+        if env_name == "MjxMyoLegWalkFixed-v0":
+            myoleg_walk_env_config['target_x_vel'] = 0.0
+            myoleg_walk_env_config['target_y_vel'] = 1.2
+            myoleg_walk_env_config['target_rot'] = None
+        elif env_name == "MjxMyoLegWalkRandom-v0":
+            myoleg_walk_env_config['target_x_vel'] = jp.array((-0.5, 0.5))
+            myoleg_walk_env_config['target_y_vel'] = jp.array((0.8, 1.5))
+            myoleg_walk_env_config['target_rot'] = None
+
+        registry.register_environment(env_name,
+                                      MjxWalkEnvV0,  # 需要确保已定义MjxWalkEnvV0类
+                                      config_callable(myoleg_walk_env_config))
+        env = registry.load(env_name)
+        return env
 
 env_names = ["MjxElbowPoseFixed-v0",
              "MjxElbowPoseRandom-v0",
              "MjxFingerPoseFixed-v0",
              "MjxFingerPoseRandom-v0",
              "MjxHandReachRandom-v0",
-             "MjxHandReachFixed-v0"]
+             "MjxHandReachFixed-v0",
+             "MjxMyoLegWalkFixed-v0",  # 新增
+             "MjxMyoLegWalkRandom-v0"]
