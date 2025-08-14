@@ -20,6 +20,8 @@ class MjxWalkEnvV0(mjx_env.MjxEnv):
         spec = mujoco.MjSpec.from_file(config.model_path.as_posix())
         spec = self.preprocess_spec(spec)
         self._mj_model = spec.compile()
+        self._mj_model.geom_margin = np.zeros(self._mj_model.geom_margin.shape)
+        print(f"All margins set to 0")
 
         self._mj_model.opt.timestep = self.sim_dt
         self._mj_model.opt.solver = mujoco.mjtSolver.mjSOL_CG
@@ -57,8 +59,8 @@ class MjxWalkEnvV0(mjx_env.MjxEnv):
         rng, rng1 = jax.random.split(rng, 2)
 
         # Initialize qpos and qvel
-        qpos = jp.array(self._mj_model.key_qpos[0].copy())
-        qvel = jp.zeros(self._mjx_model.nv)
+        qpos = jp.array(self.mjx_model.key_qpos[0].copy())
+        qvel = jp.zeros(self.mjx_model.nv)
 
         # Randomize initial state if needed
         # if self._config.get('reset_type', 'init') == 'random':
@@ -67,7 +69,7 @@ class MjxWalkEnvV0(mjx_env.MjxEnv):
         #     qpos = qpos.at[2].set(self._mj_model.key_qpos[0][2])
         #     qpos = qpos.at[3:7].set(self._mj_model.key_qpos[0][3:7])
 
-        data = mjx_env.init(self._mjx_model, qpos=qpos, qvel=qvel, ctrl=jp.zeros((self._mjx_model.nu,)))
+        data = mjx_env.init(self.mjx_model, qpos=qpos, qvel=qvel, ctrl=jp.zeros((self.mjx_model.nu,)))
 
         obs = self._get_obs(data)
         reward, done = jp.zeros(2)
@@ -85,10 +87,14 @@ class MjxWalkEnvV0(mjx_env.MjxEnv):
         self.steps += 1
 
         # Normalize action if needed
-        norm_action = action  # Could add normalization like in pose_v0 if needed
+        norm_action = jp.zeros(action.shape) # Could add normalization like in pose_v0 if needed
 
-        data = mjx_env.step(self._mjx_model, state.data, norm_action)
+        data = mjx_env.step(self.mjx_model, state.data, norm_action)
 
+        # qpos = jp.array(self._mj_model.key_qpos[0].copy())
+        # qvel = jp.zeros(self._mjx_model.nv)
+        # data.qpos =qpos
+        # data= data.replace(qpos=qpos, qvel=qvel)
         # Compute rewards
         vel_reward = self._get_vel_reward(data)
         cyclic_hip = self._get_cyclic_rew()
@@ -118,7 +124,7 @@ class MjxWalkEnvV0(mjx_env.MjxEnv):
     def _get_obs(self, data: mjx.Data) -> jp.ndarray:
         """Observe qpos (without xy), qvel, com_vel, torso_angle, feet heights, etc."""
         qpos_without_xy = data.qpos[2:]
-        qvel = data.qvel * self._mjx_model.opt.timestep
+        qvel = data.qvel * self.mjx_model.opt.timestep
         com_vel = self._get_com_velocity(data)
         torso_angle = self._get_torso_angle(data)
         feet_heights = self._get_feet_heights(data)
@@ -126,7 +132,7 @@ class MjxWalkEnvV0(mjx_env.MjxEnv):
         feet_rel_pos = self._get_feet_relative_position(data)
         phase_var = jp.array([(self.steps / self.hip_period) % 1])
 
-        if self._mjx_model.na > 0:
+        if self.mjx_model.na > 0:
             act = data.act
         else:
             act = jp.zeros(0)
@@ -156,11 +162,11 @@ class MjxWalkEnvV0(mjx_env.MjxEnv):
         return -jp.linalg.norm(des_angles - angles)
 
     def _get_ref_rotation_rew(self, data):
-        target_rot = self.target_rot if self.target_rot is not None else self._mj_model.key_qpos[0][3:7]
+        target_rot = self.target_rot if self.target_rot is not None else self.mj_model.key_qpos[0][3:7]
         return jp.exp(-jp.linalg.norm(5.0 * (data.qpos[3:7] - target_rot)))
 
     def _get_joint_angle_rew(self, data, joint_names):
-        angles = jp.array([data.qpos[self._mj_model.jnt_qposadr[mujoco.mj_name2id(self._mj_model, mujoco.mjtObj.mjOBJ_JOINT.value, name)]]
+        angles = jp.array([data.qpos[self.mj_model.jnt_qposadr[mujoco.mj_name2id(self.mj_model, mujoco.mjtObj.mjOBJ_JOINT.value, name)]]
                            for name in joint_names])
         return jp.exp(-5 * jp.mean(jp.abs(angles)))
 
@@ -170,15 +176,15 @@ class MjxWalkEnvV0(mjx_env.MjxEnv):
         return jp.where((height < self.min_height) | (rot_condition > self.max_rot), 1.0, 0.0)
 
     def _get_feet_heights(self, data):
-        foot_id_l = mujoco.mj_name2id(self._mj_model, mujoco.mjtObj.mjOBJ_BODY.value, 'talus_l')
-        foot_id_r = mujoco.mj_name2id(self._mj_model, mujoco.mjtObj.mjOBJ_BODY.value, 'talus_r')
+        foot_id_l = mujoco.mj_name2id(self.mj_model, mujoco.mjtObj.mjOBJ_BODY.value, 'talus_l')
+        foot_id_r = mujoco.mj_name2id(self.mj_model, mujoco.mjtObj.mjOBJ_BODY.value, 'talus_r')
         return jp.array([data.xpos[foot_id_l][2], data.xpos[foot_id_r][2]])
 
     def _get_feet_relative_position(self, data):
 
-        foot_id_l = mujoco.mj_name2id(self._mj_model, mujoco.mjtObj.mjOBJ_BODY.value, 'talus_l')
-        foot_id_r = mujoco.mj_name2id(self._mj_model, mujoco.mjtObj.mjOBJ_BODY.value, 'talus_r')
-        pelvis = mujoco.mj_name2id(self._mj_model, mujoco.mjtObj.mjOBJ_BODY.value, 'pelvis')
+        foot_id_l = mujoco.mj_name2id(self.mj_model, mujoco.mjtObj.mjOBJ_BODY.value, 'talus_l')
+        foot_id_r = mujoco.mj_name2id(self.mj_model, mujoco.mjtObj.mjOBJ_BODY.value, 'talus_r')
+        pelvis = mujoco.mj_name2id(self.mj_model, mujoco.mjtObj.mjOBJ_BODY.value, 'pelvis')
         # foot_id_l = self._mj_model.body_name2id('talus_l')
         # foot_id_r = self._mj_model.body_name2id('talus_r')
         # pelvis = self._mj_model.body_name2id('pelvis')
@@ -186,16 +192,16 @@ class MjxWalkEnvV0(mjx_env.MjxEnv):
 
     def _get_torso_angle(self, data):
         # body_id = self._mj_model.body_name2id('torso')
-        body_id = mujoco.mj_name2id(self._mj_model, mujoco.mjtObj.mjOBJ_BODY.value, 'torso')
+        body_id = mujoco.mj_name2id(self.mj_model, mujoco.mjtObj.mjOBJ_BODY.value, 'torso')
         return data.xquat[body_id]
 
     def _get_com_velocity(self, data):
-        mass = jp.expand_dims(self._mj_model.body_mass, -1)
+        mass = jp.expand_dims(self.mj_model.body_mass, -1)
         cvel = -data.cvel
         return (jp.sum(mass * cvel, 0) / jp.sum(mass))[3:5]
 
     def _get_height(self, data):
-        mass = jp.expand_dims(self._mj_model.body_mass, -1)
+        mass = jp.expand_dims(self.mj_model.body_mass, -1)
         com = data.xipos
         return (jp.sum(mass * com, 0) / jp.sum(mass))[2]
 
@@ -213,7 +219,7 @@ class MjxWalkEnvV0(mjx_env.MjxEnv):
         return jp.abs((mat @ jp.array([1.0, 0.0, 0.0]))[0])
 
     def _get_angle(self, joint_names):
-        return jp.array([self._mj_model.jnt_qposadr[mujoco.mj_name2id(self._mj_model, mujoco.mjtObj.mjOBJ_JOINT.value, name)]
+        return jp.array([self.mj_model.jnt_qposadr[mujoco.mj_name2id(self.mj_model, mujoco.mjtObj.mjOBJ_JOINT.value, name)]
                          for name in joint_names])
 
     # Accessors

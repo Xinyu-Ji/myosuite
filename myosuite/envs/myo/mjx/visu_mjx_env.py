@@ -3,6 +3,7 @@ import mujoco
 import jax
 import mujoco.viewer
 import numpy as np
+import jax.numpy as jp
 
 from myosuite.envs.myo.mjx import make
 # Visualize an MJX environment interactively
@@ -30,7 +31,7 @@ def main():
             step_start = time.time()
 
             state = state.replace(data=state.data.replace(mocap_pos=d.mocap_pos, xfrc_applied=d.xfrc_applied))
-            # d.ctrl = np.zeros(env.ctrl_dim)
+            # d.ctrl = jp.zeros(state.data.act.shape)
             state = jit_step(state, d.ctrl)
 
             d.qpos = state.data.qpos
