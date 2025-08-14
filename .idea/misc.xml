@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="myosuite" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="myosuite (3)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="myosuite" project-jdk-type="Python SDK" />
 </project>
