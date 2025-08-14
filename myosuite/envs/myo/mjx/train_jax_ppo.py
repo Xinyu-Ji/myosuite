@@ -60,4 +60,4 @@ def progress(num_steps, metrics):
 
 
 if __name__ == "__main__":
-  main("MjxElbowPoseFixed-v0")
+  main("MjxHandReachFixed-v0")
