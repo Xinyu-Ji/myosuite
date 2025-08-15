@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8624193d-e420-406c-930f-bd3720ac7e62" name="Changes" comment="已完成修改，需要后面修改肌肉动作溢出问题">
+    <list default="true" id="8624193d-e420-406c-930f-bd3720ac7e62" name="Changes" comment="上传">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myosuite/envs/myo/mjx/playground_walk_v0.py" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/envs/myo/mjx/playground_walk_v0.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myosuite/envs/myo/mjx/visu_mjx_env.py" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/envs/myo/mjx/visu_mjx_env.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myosuite/simhive/myo_sim" beforeDir="false" afterPath="$PROJECT_DIR$/myosuite/simhive/myo_sim" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +64,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "mjx__test",
-    "last_opened_file_path": "/home/max_magic_lab/OpensimRL/myoassist",
+    "last_opened_file_path": "/home/max_lab/mujoco_test",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -154,6 +153,7 @@
       <workItem from="1755053009005" duration="5166000" />
       <workItem from="1755144401893" duration="2916000" />
       <workItem from="1755152088980" duration="1880000" />
+      <workItem from="1755231159985" duration="3803000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <option name="closed" value="true" />
@@ -232,6 +232,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/myosuite$visu_policy.coverage" NAME="visu_policy Coverage Results" MODIFIED="1755145982621" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/myosuite/envs/myo/mjx" />
-    <SUITE FILE_PATH="coverage/myosuite$visu_mjx_env.coverage" NAME="visu_mjx_env Coverage Results" MODIFIED="1755158643166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/myosuite/envs/myo/mjx" />
+    <SUITE FILE_PATH="coverage/myosuite$visu_mjx_env.coverage" NAME="visu_mjx_env Coverage Results" MODIFIED="1755230429131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/myosuite/envs/myo/mjx" />
   </component>
 </project>

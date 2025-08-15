@@ -20,8 +20,6 @@ class MjxWalkEnvV0(mjx_env.MjxEnv):
         spec = mujoco.MjSpec.from_file(config.model_path.as_posix())
         spec = self.preprocess_spec(spec)
         self._mj_model = spec.compile()
-        self._mj_model.geom_margin = np.zeros(self._mj_model.geom_margin.shape)
-        print(f"All margins set to 0")
 
         self._mj_model.opt.timestep = self.sim_dt
         self._mj_model.opt.solver = mujoco.mjtSolver.mjSOL_CG
@@ -59,7 +57,7 @@ class MjxWalkEnvV0(mjx_env.MjxEnv):
         rng, rng1 = jax.random.split(rng, 2)
 
         # Initialize qpos and qvel
-        qpos = jp.array(self.mjx_model.key_qpos[0].copy())
+        qpos = jp.array(self.mj_model.key_qpos[0].copy())
         qvel = jp.zeros(self.mjx_model.nv)
 
         # Randomize initial state if needed
@@ -87,14 +85,10 @@ class MjxWalkEnvV0(mjx_env.MjxEnv):
         self.steps += 1
 
         # Normalize action if needed
-        norm_action = jp.zeros(action.shape) # Could add normalization like in pose_v0 if needed
+        norm_action = action  # Could add normalization like in pose_v0 if needed
 
         data = mjx_env.step(self.mjx_model, state.data, norm_action)
 
-        # qpos = jp.array(self._mj_model.key_qpos[0].copy())
-        # qvel = jp.zeros(self._mjx_model.nv)
-        # data.qpos =qpos
-        # data= data.replace(qpos=qpos, qvel=qvel)
         # Compute rewards
         vel_reward = self._get_vel_reward(data)
         cyclic_hip = self._get_cyclic_rew()
@@ -162,7 +156,7 @@ class MjxWalkEnvV0(mjx_env.MjxEnv):
         return -jp.linalg.norm(des_angles - angles)
 
     def _get_ref_rotation_rew(self, data):
-        target_rot = self.target_rot if self.target_rot is not None else self.mj_model.key_qpos[0][3:7]
+        target_rot = self.target_rot if self.target_rot is not None else self._mj_model.key_qpos[0][3:7]
         return jp.exp(-jp.linalg.norm(5.0 * (data.qpos[3:7] - target_rot)))
 
     def _get_joint_angle_rew(self, data, joint_names):
