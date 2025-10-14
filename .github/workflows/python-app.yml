@@ -102,17 +102,18 @@ jobs:
         conda activate $CONDA_DEFAULT_ENV
         python3 -m myosuite.tests.test_myoapi
 
+    - name: Run Test mjx
+      run: |
+        conda activate $CONDA_DEFAULT_ENV
+        pip3 install -e '.[mjx]'
+        python3 -m pytest myosuite/tests/test_mjx.py -v
+        python3 -m pytest myosuite/tests/mjx/test_quat_math.py -v
+        python3 -m pytest myosuite/tests/mjx/test_fatigue.py -v
+        python3 -m pytest myosuite/tests/mjx/test_reference_motion.py -v
+
     - name: Run Test environment
       run: |
         python3 -m myosuite.tests.test_myo
-
-    - name: Run Test mjx
-      run: |
-        pip install -e '.[mjx]'
-        python myosuite/tests/test_mjx.py
-        python myosuite/tests/mjx/test_quat_math.py
-        python myosuite/tests/mjx/test_fatigue.py
-        python myosuite/tests/mjx/test_reference_motion.py
 
     - name: Install ffmpeg
       if: ${{ runner.os == 'Linux' }}
