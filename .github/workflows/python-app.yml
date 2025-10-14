@@ -63,7 +63,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v3
       with:
         auto-activate-base: false
-        python-version: "3.9"
+        python-version: "3.10"
 
     - name: Enable Conda (window/ubuntu)
       if: ${{ runner.os != 'macOS' }}
@@ -75,7 +75,7 @@ jobs:
       run: |
           conda info
           CONDA_DEFAULT_ENV=test_myosuite
-          conda create --name $CONDA_DEFAULT_ENV python=3.9 -y
+          conda create --name $CONDA_DEFAULT_ENV python=3.10 -y
           conda activate $CONDA_DEFAULT_ENV
 
 #     - name: Prepare MacOS
