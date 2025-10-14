@@ -106,6 +106,7 @@ jobs:
       run: |
         conda activate $CONDA_DEFAULT_ENV
         pip3 install -e '.[mjx]'
+        pip3 install pytest
         python3 -m pytest myosuite/tests/test_mjx.py -v
         python3 -m pytest myosuite/tests/mjx/test_quat_math.py -v
         python3 -m pytest myosuite/tests/mjx/test_fatigue.py -v
